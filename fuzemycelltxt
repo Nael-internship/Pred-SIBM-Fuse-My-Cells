@@ -1,0 +1,161 @@
+🔬 Fuse My Cells : du point de vue unique à la fusion multivue – Challenge Lightsheet Imaging 2025
+
+(Fait partie de la conférence ISBI 2025)
+
+🔎 À propos
+
+Le challenge Fuse My Cells, organisé par France-BioImaging, vise à développer de nouvelles méthodes de fusion d’images 3D en utilisant l’intelligence artificielle, appliquées à la biologie et à la microscopie.
+
+En microscopie multivue, pour créer une seule image 3D nette, il faut habituellement filmer le même échantillon sous plusieurs angles (souvent 2 à 4) puis aligner et fusionner ces vues pour obtenir une image meilleure et plus homogène.
+Cette fusion corrige les défauts optiques en profondeur et augmente la qualité globale… mais augmente aussi l’exposition lumineuse, ce qui peut abîmer les cellules.
+
+🎯 Objectif du challenge :
+→ Prévoir une image 3D fusionnée multivue… à partir d’une seule vue 3D.
+Cela permettrait :
+
+d’améliorer la qualité d’image,
+
+de filmer plus longtemps du vivant,
+
+de réduire la quantité de lumière envoyée,
+
+de faciliter l’analyse automatique.
+
+🎯 Tâche du challenge
+
+Développer des méthodes d’IA qui, à partir d’une seule acquisition 3D, reconstruisent ce que donnerait une fusion multivue.
+
+💡 Contexte scientifique (explication simplifiée)
+1) Problème général : la lumière abîme le vivant
+
+En microscopie, la lumière :
+
+peut détruire la fluorescence (photoblanchiment),
+
+peut tuer ou endommager les cellules (phototoxicité).
+
+Plus on filme longtemps ou plus on augmente les angles, plus on détruit l’échantillon.
+
+2) Confocal : haute résolution mais très agressif
+
+Microscopie confocale :
+
+excellente résolution,
+
+bon découpage en Z,
+
+mais exposition lumineuse très élevée → mauvais pour le vivant à long terme.
+
+3) Lightsheet (SPIM) : illumine uniquement le plan observé
+
+Avantages :
+
+beaucoup moins de lumière,
+
+meilleur pour suivre du vivant,
+
+permet de faire tourner l’échantillon pour filmer sous plusieurs angles.
+
+Limites :
+
+qualité dégradée en profondeur (> 100 µm),
+
+résolution asymétrique (moins bonne dans l’axe Z),
+
+aberrations optiques,
+
+difficultés avec les gros échantillons (embryons, tissus).
+
+4) Solution classique : multivue + fusion
+
+On filme l’échantillon sous plusieurs angles et on fusionne tout :
+
+✔ meilleure résolution 3D
+✔ moins d’ombres
+✔ meilleure segmentation et suivi cellulaire
+
+Mais :
+✘ plus de lumière = plus de dommages
+✘ procédures plus complexes
+✘ plus de temps d’imagerie par angle
+
+✨ Solution proposée : le challenge Fuse My Cells
+
+Créer une grosse base de données pour entraîner des IA capables de :
+
+→ prédire l’image fusionnée multivue à partir d’une seule vue.
+
+Cela permettrait :
+
+d’utiliser moins de lumière,
+
+d’ajouter davantage de canaux fluorescents,
+
+de filmer plus longtemps,
+
+de réduire les artefacts optiques.
+
+Ce challenge succède à Light My Cells (ISBI 2024).
+
+📰 État de l’art (explication simplifiée)
+🧹 1) Denoising (réduction du bruit)
+
+Méthodes classiques :
+
+BM3D (Dabov 2007) : un standard encore très utilisé.
+
+Méthodes IA :
+
+CARE (2018) : nécessite des images propres comme référence.
+
+Noise2Void (2019) : auto-supervisé, fonctionne sans image propre.
+
+Limite commune :
+❗ amélioration surtout dans l’axe XY (plan caméra), peu dans l’axe Z.
+
+🔍 2) Déconvolution (réduction du flou)
+
+On “inverse” mathématiquement l’effet du PSF de la microscopie.
+
+Richardson–Lucy appliqué à SPIM (2011)
+
+Multi-view deconvolution (Preibisch 2013) : plus rapide et adaptée aux grandes données.
+
+Modèles variés (Toader 2022, Prigent 2023) pour gérer bruit, flou variable, vidéos 3D.
+
+Récemment :
+
+GAN pour super-résolution (2019)
+
+Déconvolution guidée par la physique (2022)
+
+Airy beam + deep learning (2023)
+
+Limite générale :
+❗ Peu adaptées à la multivue lightsheet complète.
+❗ Ne permettent pas d’entraîner un modèle pour “toutes” les orientations 3D.
+
+🧬 3) IsoView (2015)
+
+Système utilisant 4 vues orthogonales pour une résolution quasi isotrope.
+Très performant, mais complexe, lourd, et non généralisable facilement.
+
+🚀 Perspectives
+
+Si le challenge réussit :
+
+création de méthodes robustes, open-source et généralisables,
+
+adaptation possible à d’autres microscopes via transfer learning,
+
+amélioration de la 3D :
+
+segmentation,
+
+suivi cellulaire,
+
+reconstruction de volumes profonds,
+
+réduction artefacts.
+
+En bref : une nouvelle génération d’outils IA pour imagerie bio 3D.
