@@ -1,79 +1,55 @@
-# FuseMyCells `🔬+🤖 = 2×🔬`
-France-BioImaging's Fuse My Cells challenge
+FuseMyCells 🔬+🤖 = 2×🔬
 
-Link to the challenge for more information :
-* [fusemycells.grand-challenge.org](https://fusemycells.grand-challenge.org/)
-* [france-bioimaging.org announcement](https://france-bioimaging.org/announcement/france-bioimaging-challenge-is-back-fuse-my-cells/)
+Ma participation au challenge France-BioImaging
 
+Voici mon dépôt dédié au challenge Fuse My Cells organisé par France-BioImaging.
+J’y rassemble mon travail, mes essais, mes choix méthodologiques et les scripts que j’ai développés pour préparer les données et évaluer mes méthodes.
 
-## Results
+Pour plus d’informations sur le challenge :
 
-* [test_phase/leaderboard](https://fusemycells.grand-challenge.org/evaluation/test_phase/leaderboard/)
-  * closed 07/03/2025 (initial date 28/02/2025)
-* [evaluation/leaderboard](https://fusemycells.grand-challenge.org/evaluation/evaluation/leaderboard/)
-  * closed 17/03/2025
+fusemycells.grand-challenge.org
 
-## Usage
+Annonce France-BioImaging
 
-### Prepare dataset
+🧪 Résultats
 
-1. Download the dataset zip files un put all of them in
-a folder. The following instruction need to be executed
-from this folder.
-2. Run script `01_unzip.py`
-    * Notes: the scripts for data prepration are located
-      in the `data` folder.
-3. Run script `02_tif_to_hdf5.py`
+Leaderboard test_phase
 
-Now, the zip files have been extracted to an `images` folder
-and then put in a single file named `FuseMyCells.hdf5`.
+clôturé le 07/03/2025 (date initiale : 28/02/2025)
 
-### Run an evaluation
+Leaderboard evaluation
 
-```
+clôturé le 17/03/2025
+
+📂 Usage
+Préparation du dataset
+
+C’est la procédure que j’ai suivie pour préparer les données :
+
+Télécharger tous les fichiers .zip et les placer dans un même dossier.
+Les instructions suivantes doivent être exécutées depuis ce dossier.
+
+Lancer 01_unzip.py
+Les scripts liés à la préparation des données se trouvent dans le dossier data/.
+
+Lancer 02_tif_to_hdf5.py
+
+À l’issue de ces étapes, toutes les images extraites se trouvent dans un dossier images/, puis sont regroupées dans un unique fichier FuseMyCells.hdf5.
+
+Lancer une évaluation
 usage: eval.py [-h] [--use-gpu] --method {gaussian_filter,denoise_wavelet,denoise_tv_bregman} [--args ARGS [ARGS ...]]
                [--dataset DATASET] [--crop-data]
 eval.py: error: the following arguments are required: --method
-```
+Exemple d’appel que j’utilise :
+python eval.py --method gaussian_filter --args sigma=0.5 --dataset FuseMyCells.hdf5
 
-`python eval.py --method gaussian_filter --args sigma=0.5 --dataset FuseMyCells.hdf5`
-
-## Method
-
-Taking the [docker_template](https://seafile.lirmm.fr/d/233a5a399c8544dfb41a/) given by the organizer as a start point.
-
-```python
-from scipy import ndimage
+Je suis parti du docker_template
+ fourni par l’organisation, que j’ai adapté à ma démarche.
+ from scipy import ndimage
 if metadata['channel'] == 'nucleus':
     image_predict = ndimage.gaussian_filter(image_input, 0.442)
 else:
     image_predict = ndimage.gaussian_filter(image_input, 0.5)
-```
 
-The filter sigma values have been manually selected from evaluation on the training dataset.
-The evaluation process is done using `eval.py` and in our case usage of the `run.sh` script.
-
-
-## Changelog
-
-#### 27/03/2025
-
-* Update README (cleaning for final version)
-* Add code for the docker
-
-#### 07/03/2025
-
-* Add result used to specify methods
-* Update README (add method)
-
-#### 28/02/2025
-
-* Adding evaluation of method script
-  * usage for classical computer vision methods
-* Update README (put my exp results in the idea section)
-
-#### 17/01/2025
-
-* Working on data acquisition and preprocessing
-  * script to unzip all the data at once
-  * script to convert all the images into a single HDF5 file for easier load
+Les valeurs de sigma ont été choisies manuellement après plusieurs évaluations sur le dataset d’entraînement.
+L’évaluation s’effectue via eval.py, et dans mon cas j’utilise plus souvent le script run.sh pour automatiser mes tests.
