@@ -11,16 +11,6 @@ fusemycells.grand-challenge.org
 
 Annonce France-BioImaging
 
-🧪 Résultats
-
-Leaderboard test_phase
-
-clôturé le 07/03/2025 (date initiale : 28/02/2025)
-
-Leaderboard evaluation
-
-clôturé le 17/03/2025
-
 📂 Usage
 Préparation du dataset
 
