@@ -173,5 +173,8 @@ cython_debug/
 # Windows shortcut
 *.lnk
 
+# LibreOffice lock files
+.~lock.*
+
 # Personal folder for old stuff
 __old__/
